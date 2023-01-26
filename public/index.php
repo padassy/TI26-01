@@ -24,7 +24,7 @@ try {
 // Creation d une requete qui va recuperer les donnees de la DB
 
 // Variable qui contient la requete SQL 
-$requeteRecupDonneesDB = "SELECT `firstname`,`lastname`,`usermail`,`message`,`datemessage` FROM livreor;";
+$requeteRecupDonneesDB = "SELECT `firstname`,`lastname`,`usermail`,`message`,`datemessage` FROM livreor ORDER BY datemessage DESC;";
 
 
 // Variable qui envoie la requete SQL a la DB abec la connexion a la DB + la requete
@@ -36,7 +36,7 @@ $nbUser = mysqli_num_rows($recupDonneesDB);
 
 
 // On met la resultante dans un tableau associatif 
-$resultatRecupDB = mysqli_fetch_assoc($recupDonneesDB);
+$resultatRecupDB = mysqli_fetch_all($recupDonneesDB, MYSQLI_ASSOC);
 //Debugage des variables cree plus haut 
 //var_dump($donneeDeConnexionSql, $requeteRecupDonneesDB, $resultatRecupDB, $recupDonneesDB);
 
@@ -45,7 +45,7 @@ $resultatRecupDB = mysqli_fetch_assoc($recupDonneesDB);
 
 // On verifie l'existance des variables Post envoyee par le formulaire avec un isset 
 
-if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['message'])) {
+if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['message'])){
 
 
     // on traite les donnees utilisateur avant de les envoyer vers la DB, on enleve les espaces avec le trim , on supprime les tags html avec strip_tags, et on converti les caracteres speciaux en entites html avec html specialchars et on encode les guillemets avec ENT_QUOTES
@@ -58,8 +58,8 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['m
 
     // Envoi des donnees traitee precedement 
 // Je verifie que les donnes Post ne sont PAS vides et si elle sont remplie je les stock dans un variable qui contient les instructions SQL vers la DB et je filtre le champs mail qui verifie si c est bien un mail valide 
-    if (!empty($nom) && !empty($texte) && filter_var($mail, FILTER_VALIDATE_EMAIL)):
-        $envoiDesDonneesUtilisateurSql = "INSERT INTO livreor (firstname, lastname, usermail,message) VALUES ('$prenom,'$nom','$mail','$texte')";
+    if (!empty($nom)&&!empty($texte)):
+        $envoiDesDonneesUtilisateurSql = "INSERT INTO livreor (firstname,lastname,usermail,message) VALUES ('$prenom','$nom','$mail','$texte')";
 
         // try catch qui permet la gestion des messages en cas et de reussite de l envoi ou des differentes erreurs 
 
