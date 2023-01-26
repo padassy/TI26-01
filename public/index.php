@@ -1,6 +1,6 @@
 <?php
 // on importe le fichier config en require once car fichier important et necessaire au site on arrete le script en cas d erreur  
-require_once "config.php";
+require_once "../config.php";
 $message = " ";
 $messageGood = " ";
 
@@ -60,7 +60,7 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['m
 // Je verifie que les donnes Post ne sont PAS vides et si elle sont remplie je les stock dans un variable qui contient les instructions SQL vers la DB et je filtre le champs mail qui verifie si c est bien un mail valide 
     if (!empty($nom)&&!empty($texte)):
         $envoiDesDonneesUtilisateurSql = "INSERT INTO livreor (firstname,lastname,usermail,message) VALUES ('$prenom','$nom','$mail','$texte')";
-
+        header("Location:./");
         // try catch qui permet la gestion des messages en cas et de reussite de l envoi ou des differentes erreurs 
 
 
@@ -91,5 +91,9 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['m
 
     endif;
 }
+mysqli_close($donneeDeConnexionSql);
 
 include "../view/indexView.php";
+
+
+

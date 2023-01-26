@@ -43,22 +43,38 @@ Affichage des erreurs
     <div class="captcha">
         <p id="captcha"></p></br></br>
         <button id="captchaRefresh" type="button">Refresh</button>
-        <input id="captchaInput" type="text" placeholder="Entrez le captcha"></br></br>
+        <input id="captchaInput" type="text" placeholder="Entrez le captcha"><span></span><br></br>
     </div>
 </form>
 <script src="js/captcha.js"></script>
 
 <?php
+if ($nbUser == 0):
+?>
+<h2>Pas de message précédent</h2>
+<?php
+elseif ($nbUser == 1):
+?>
+<h2>Message précédent :</h2>
+<h3>Il y a un commentaire disponible</h3>
+<?php
+else:
+?>
+<h2>Messages précédents:</h2>
+<h3>Il y a <?=$nbUser?> commentaires disponibles</h3>
+<?php
+endif;
 //var_dump($_POST);
 // si aucun resultat in affiche pas d adresse
 if (empty($resultatRecupDB)): 
 ?>
     
-        <h1>Pas encore d'adresse enregistrée </h1>
+        <h2>Pas encore de commentaire enregistré </h2>
 <?php
-        elseif($nbUser==1):
+elseif ($nbUser == 1):
+    foreach ($resultatRecupDB as $item):
 ?>
-    <h1> Une adresse enregistrée </h1>
+    <h2> Un commentaire a été enregistré </h2>
     <table>
         <tr>
             <th>
@@ -81,29 +97,27 @@ if (empty($resultatRecupDB)):
         </tr>
         <tr>
             <td>
-                <h3><?=-$resultatRecupDB['firstname']?></h3>
+                <h3><?=$item['firstname']?></h3>
             </td>
             <td>
-                <h3><?=$resultatRecupDB['lastname']?></h3>
+                <h3><?=$item['lastname']?></h3>
             </td>
             <td>
-                <h3><?=$resultatRecupDB['usermail']?></h3>
+                <h3><?=$item['usermail']?></h3>
             </td>
             <td>
-                <h3><?=$resultatRecupDB['message']?></h3>
+                <h3><?=$item['message']?></h3>
             </td>
             <td>
-                <h3><?=$resultatRecupDB['datemessage']?></h3>
+                <h3><?=$item['datemessage']?></h3>
             </td>
         </tr>
     </table>
-<?php            
-           
-        else:
-// si on a plusieurs adresses dans la DB on boucle 
-?>
-        <h2>Nombre d'adresses dans la database : <?=$nbUser?></h2>
 <?php
+        endforeach;
+    else:
+// si on a plusieurs adresses dans la DB on boucle 
+
         foreach ($resultatRecupDB as $item):
         
 ?>
