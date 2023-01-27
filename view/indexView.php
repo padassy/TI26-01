@@ -9,11 +9,8 @@
     <title>Formulaire</title>
 </head>
 <body>
-    
-<h2>test vue</h2>
-
-
 <h1>Livre d'or</h1>
+<img src="/img/email.png" alt="email">
 <form action="" method="POST" id="formulaire">
     <h2> Laissez-nous un message</h2>
     <div class="conteneurChampsLabelInput">
@@ -21,23 +18,23 @@
         <input type="text" name="firstname" placeholder="Votre prénom" autocomplete="given-name" maxlength="50">
     </div>
 <br>
-    <div>
+    <div class="conteneurChampsLabelInput">
         <label for="lastname">Nom : *</label>
         <input type="text" name="lastname" placeholder="Votre nom" autocomplete="family-name" maxlength="50">
     </div>
 <br>
-    <div>
+    <div class="conteneurChampsLabelInput">
         <label for="usermail">Adresse mail : *</label>
         <input type="email" name="usermail" placeholder="Votre adresse mail" autocomplete="email" maxlength="100" required>
     </div>
 <br>
-    <div>
+    <div class="conteneurChampsLabelInput">
         <label for="message">Commentaire : *</label>
         <textarea name="message" cols="50" rows="10" maxlength="600" placeholder="veuillez laissez votre commentaire ici" required>
         </textarea>
+    </div>
 
     <h5>Champs requis (*)</h5>
-    </div>
     <input type="submit" id="captchaValidate" value="Envoyer">
 
     <div class="captcha">
@@ -68,7 +65,7 @@ if ($nbUser == 0):
 elseif ($nbUser == 1):
 ?>
 <h2>Message précédent :</h2>
-<h3>Il y a un commentaire disponible</h3>
+<h2>Il y a un commentaire disponible</h2>
 <?php
 else:
 ?>
@@ -84,27 +81,24 @@ if (empty($resultatRecupDB)):
         <h2>Pas encore de commentaire enregistré </h2>
 <?php
 elseif ($nbUser == 1):
-    foreach ($resultatRecupDB as $item):
 ?>
     <h2> Un commentaire a été enregistré </h2>
+<div id="tableau">
+<?php
+foreach ($resultatRecupDB as $item):
+?>
     <table>
         <tr>
             <th>
-                <h2>Prénom:</h2>
+                <h2 class="titreTableau">Prénom:</h2>
             </th>
             <th>
-                <h2>
+                <h2 class="titreTableau">
                     Nom:
                 </h2>
             </th>
             <th>
-                <h2>Adresse mail:</h2>
-            </th>
-            <th>
-                <h2>Date:</h2>
-            </th>
-            <th>
-                <h2>Commentaires:</h2>
+                <h2 class="titreTableau">Adresse mail:</h2>
             </th>
         </tr>
         <tr>
@@ -117,41 +111,51 @@ elseif ($nbUser == 1):
             <td>
                 <h3><?=$item['usermail']?></h3>
             </td>
-            <td>
+        <tr>
+            <th colspan="2">
+                <h2 class="titreTableau">Commentaire :</h2>
+            </th>
+            <th>
+                <h2 class="titreTableau">Date :</h2>
+            </th>
+        </tr>
+            <td colspan="2">
                 <h3><?=nl2br($item['message'], ENT_QUOTES);?></h3>
             </td>
             <td>
                 <h3><?=$item['datemessage']?></h3>
             </td>
         </tr>
+    <hr>
+
     </table>
 <?php
         endforeach;
+?>
+</div>
+<?php
     else:
 // si on a plusieurs adresses dans la DB on boucle 
-
-        foreach ($resultatRecupDB as $item):
         
 ?>
-    
+<div id="tableau">
+<?php
+
+foreach ($resultatRecupDB as $item):
+
+?>
     <table>
         <tr>
             <th>
-                <h2>Prénom:</h2>
+                <h2 class="titreTableau">Prénom:</h2>
             </th>
             <th>
-                <h2>
+                <h2 class="titreTableau">
                     Nom:
                 </h2>
             </th>
             <th>
-                <h2>Adresse mail:</h2>
-            </th>
-            <th>
-                <h2>Date:</h2>
-            </th>
-            <th>
-                <h2>Commentaires:</h2>
+                <h2 class="titreTableau">Adresse mail:</h2>
             </th>
         </tr>
         <tr>
@@ -164,19 +168,31 @@ elseif ($nbUser == 1):
             <td>
                 <h3><a href="mailto:'.$item['usermail']'"><?=$item['usermail']?></a></h3>
             </td>
-            <td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <h2 class="titreTableau">Commentaire :</h2>
+            </th>
+            <th>
+                <h2 class="titreTableau">Date :</h2>
+            </th>
+        </tr>
+            <td colspan="2">
                 <h3><?=nl2br($item['message'], ENT_QUOTES);?></h3>
             </td>
             <td>
                 <h3><?=date('d-m-Y H:i:s',strtotime($item['datemessage']))?></h3>
             </td>
         </tr>
+
     </table>
-    <hr>
 <?php
-           
         endforeach;
     
+?>
+</div>
+<?php
+           
     endif;
 
 //var_dump($resultatRecupDB);
