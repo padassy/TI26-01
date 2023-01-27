@@ -1,8 +1,6 @@
 <?php
 // on importe le fichier config en require once car fichier important et necessaire au site on arrete le script en cas d erreur  
 require_once "../config.php";
-$message = " ";
-$messageGood = " ";
 
 // Try catch permettant de recuperer les erreurs en cas de probleme de connexion a la DB
 try {
@@ -46,8 +44,6 @@ $resultatRecupDB = mysqli_fetch_all($recupDonneesDB, MYSQLI_ASSOC);
 // On verifie l'existance des variables Post envoyee par le formulaire avec un isset 
 
 if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['message'])){
-
-
     // on traite les donnees utilisateur avant de les envoyer vers la DB, on enleve les espaces avec le trim , on supprime les tags html avec strip_tags, et on converti les caracteres speciaux en entites html avec html specialchars et on encode les guillemets avec ENT_QUOTES
     $prenom = htmlspecialchars(strip_tags(trim($_POST['firstname'])), ENT_QUOTES);
     $nom = htmlspecialchars(strip_tags(trim($_POST['lastname'])), ENT_QUOTES);
@@ -58,9 +54,9 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['m
 
     // Envoi des donnees traitee precedement 
 // Je verifie que les donnes Post ne sont PAS vides et si elle sont remplie je les stock dans un variable qui contient les instructions SQL vers la DB et je filtre le champs mail qui verifie si c est bien un mail valide 
-    if (!empty($nom)&&!empty($texte)):
+    if (!empty($nom)&&!empty($texte)&&filter_var($mail,FILTER_VALIDATE_EMAIL)):
         $envoiDesDonneesUtilisateurSql = "INSERT INTO livreor (firstname,lastname,usermail,message) VALUES ('$prenom','$nom','$mail','$texte')";
-        header("Location:./");
+       // header("Location:./");
         // try catch qui permet la gestion des messages en cas et de reussite de l envoi ou des differentes erreurs 
 
 
@@ -69,31 +65,47 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['m
             // Si la conditon precedente est validee on envoit les données a la DB avec mysqli_query
             mysqli_query($donneeDeConnexionSql, $envoiDesDonneesUtilisateurSql);
             // message en cas de reussite de l envoie du formulaire
-            $messageGood = "Merci pour votre commentaire ";
-
+           //ob_start();
+           $messageValider = "Merci pour votre commentaire ";
+           header("Refresh:3" );
+           /*$to      = $mail;
+           $subject = 'TI/26-01';
+           $message = 'Merci pour votre inscription';
+           $headers = 'From: pierre-alain.dassy@cf2m.onmicrosoft.com' . "\r\n" .
+           'X-Mailer: PHP/' . phpversion();*/
+           //header("Location:./");
+           //mail($to, $subject, $message, $headers);
+           //ob_flush();
 
         } catch (Exception $e) {
 
 
             // Ici je vais gérer avec Exception les différentes erreurs si la condition n' est pas verifiee 
 // Si un champs est trop long 
-            if ($e->getCode() == 1406):
-                $message = "Un champs est trop long";
-            endif;
+            if ($e->getCode() == 1406) {
+                $erreur = "Un champs est trop long";
+            }
+            
         }
 
 
 // Si le mail n est pas valide
     elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)):
+        $erreur = "Veuillez utiliser un mail valide";
 // Dans tous les autres cas ou ca n a pas envoye le formulaire
     else:
-        $message = "Il y a eu un problème lors de votre inscription, veuillez réessayer";
+        $erreur = "Il y a eu un problème lors de votre inscription, veuillez réessayer";
 
     endif;
 }
-mysqli_close($donneeDeConnexionSql);
+
+//var_dump($erreur, $messageValider);
+
 
 include "../view/indexView.php";
+
+mysqli_free_result($recupDonneesDB);
+mysqli_close($donneeDeConnexionSql);
 
 
 

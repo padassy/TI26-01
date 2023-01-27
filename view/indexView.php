@@ -12,9 +12,7 @@
     
 <h2>test vue</h2>
 
-Affichage des erreurs
-<h3><?=$message?></h3>
-<h3><?$messageGood?></h3>
+
 <h1>Livre d'or</h1>
 <form action="" method="POST" id="formulaire">
     <h2> Laissez-nous un message</h2>
@@ -24,19 +22,21 @@ Affichage des erreurs
     </div>
 <br>
     <div>
-        <label for="lastname">Nom :</label>
+        <label for="lastname">Nom : *</label>
         <input type="text" name="lastname" placeholder="Votre nom" autocomplete="family-name" maxlength="50">
     </div>
 <br>
     <div>
-        <label for="usermail">Adresse mail :</label>
+        <label for="usermail">Adresse mail : *</label>
         <input type="email" name="usermail" placeholder="Votre adresse mail" autocomplete="email" maxlength="100" required>
     </div>
 <br>
     <div>
-        <label for="message">Commentaire :</label>
+        <label for="message">Commentaire : *</label>
         <textarea name="message" cols="50" rows="10" maxlength="600" placeholder="veuillez laissez votre commentaire ici" required>
         </textarea>
+
+    <h5>Champs requis (*)</h5>
     </div>
     <input type="submit" id="captchaValidate" value="Envoyer">
 
@@ -49,6 +49,18 @@ Affichage des erreurs
 <script src="js/captcha.js"></script>
 
 <?php
+
+/*<h3><?=$message?></h3>
+<h3><?$messageGood?></h3>*/
+if (isset($erreur)) :
+    ?>
+    <h4><?=$erreur?></h4>
+     <?php
+ elseif (isset($messageValider)) :
+    ?>
+    <h4><?=$messageValider?></h4>
+    <?php
+ endif;
 if ($nbUser == 0):
 ?>
 <h2>Pas de message précédent</h2>
@@ -100,13 +112,13 @@ elseif ($nbUser == 1):
                 <h3><?=$item['firstname']?></h3>
             </td>
             <td>
-                <h3><?=$item['lastname']?></h3>
+                <h3> <?=$item['lastname']?></h3>
             </td>
             <td>
                 <h3><?=$item['usermail']?></h3>
             </td>
             <td>
-                <h3><?=$item['message']?></h3>
+                <h3><?=nl2br($item['message'], ENT_QUOTES);?></h3>
             </td>
             <td>
                 <h3><?=$item['datemessage']?></h3>
@@ -150,13 +162,13 @@ elseif ($nbUser == 1):
                 <h3><?=$item['lastname']?></h3>
             </td>
             <td>
-                <h3><?=$item['usermail']?></h3>
+                <h3><a href="mailto:'.$item['usermail']'"><?=$item['usermail']?></a></h3>
             </td>
             <td>
-                <h3><?=$item['message']?></h3>
+                <h3><?=nl2br($item['message'], ENT_QUOTES);?></h3>
             </td>
             <td>
-                <h3><?=$item['datemessage']?></h3>
+                <h3><?=date('d-m-Y H:i:s',strtotime($item['datemessage']))?></h3>
             </td>
         </tr>
     </table>
