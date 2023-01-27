@@ -6,22 +6,21 @@
     align-items: center;
 }
 #captcha {
-    /*-webkit-user-select: none;  /*Safari */
-    /*-ms-user-select: none; /*IE 10+ */
-    /*user-select: none;*/
+    -webkit-user-select: none;  /*Safari */
+    -ms-user-select: none; /*IE 10+ */
+    user-select: none;
 
     background-color: white;
     text-align: center;
-    height: 5vh;
-    line-height: 5vh;
+    height: 2em;
+    line-height: 2em;
     font-size: 2em;
     width: 8em;
     min-width: 8em;
     margin: 0;
     background-color: #56add5;
-    border: solid 1px #055070;
-    border-radius: 5px;
-    padding: 0.5em 0;
+    border: 1px solid #02526c;
+    border-radius: 10px;
 }
 #captchaInput{
     height: 2.5em;
@@ -33,14 +32,12 @@
 #captchaRefresh{
     height: 2.5em;
     width: 20vw;
-    margin-right: 2.5vw;
     border-radius: 10px;
     border: 1px solid white;
     font-size: 1em;
     font-weight: 500;
     background-color: black;
     color: white;
-    margin-bottom: 1em;
     
 
 }
@@ -51,13 +48,12 @@
     border-radius: 3px;
 }
 
-#captchaRefresh + span::after {
+.invalidCaptcha + span::after {
     content: "captcha invalide";
     color: red;
     font-size: 2em;
     font-style: italic;
     padding-left: 5px;
-    margin-bottom: 2em;
 }
 
 .validCaptcha {
@@ -65,16 +61,15 @@
     border-radius: 3px;
 }
 
-#captchaRefresh + span::after {
+.validCaptcha + span::after {
     content: "vérification réussie";
     color: green;
     font-size: 2em;
     font-style: italic;
     padding-left: 5px;
-    margin-bottom: 2em;
 }
 #captchaValidate {
-    margin: 1em 12vw;
+    align-items: center;
     color: white;
     background-color: black;
     font-family: "Inter";
@@ -84,6 +79,7 @@
     text-transform: uppercase;
     padding:0.5em 1em;
     border-radius: 10px;
-    width:11em ;
+    width:10em ;
     border: solid 1px white;
 }
+

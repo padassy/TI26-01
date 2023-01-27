@@ -10,10 +10,16 @@ body{
     font-family: "Roboto";
 
 }
+.pageflex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .conteneurChampsLabelInput{
     display: flex;
     flex-direction: column;
 }
+.conteneurChampsLabelInput
 #tableau{
     border-radius: 10px;
     width: 80vw;
@@ -58,14 +64,20 @@ input{
     border-radius: 5px;
     height: 2em;
     margin-bottom: 2em;
+    font-size: 1.2em;
 }
 
 textarea{
     border-radius: 5px;
+    font-size: 1em;
+    margin: 1em;
+}
+.labelcommentaire{
+    margin-top: 2em;
 }
 label{
     margin-bottom: 0.5em;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 500;
 }
 form{
@@ -88,4 +100,73 @@ form{
 
 td{
     font-weight: 500;
+
+}
+.positionbouton {
+    display: block;
+    text-align: center;
+}
+@media screen and (min-width:480px) and (max-width:960px){
+  table{
+    min-width: 750px;
+  }
+  .conteneurChampsLabelInput{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.conteneurChampsLabelInput input{
+    width: 40vw;
+    margin-right: 2em;
+}
+.conteneurChampsLabelInput label{
+    margin-left: 2em;
+
+}
+textarea{
+    margin:2.1em;
+    height: 15em
+}
+
+}
+@media screen and (min-width:960px){
+    table{
+        min-width: 1500px;
+        max-width: none;
+      }
+      .conteneurChampsLabelInput{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .conteneurChampsLabelInput input{
+        width: 40vw;
+        margin-right: 4em;
+    }
+    .conteneurChampsLabelInput label{
+        margin-left: 4em;
+    
+    }
+    textarea{
+        margin-right: 6em;
+        width: 40vw;
+        height: 20em;
+    }
+    form {
+        width: 60vw;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+    .pageflex{
+        display: flex;
+        flex-direction: row;
+    }
+    .labelcommentaire{
+        margin-top: 1em;
+    }
+    input{
+        margin: 0 0 ;
+    }
 }

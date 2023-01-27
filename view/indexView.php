@@ -13,7 +13,8 @@
 </head>
 <body>
 <h1 id="titre">Le livre d'or</h1>
-<img src="/img/email.png" alt="email">
+<div class="pageflex">
+<img src="img/email.png" alt="email">
 <form action="" method="POST" id="formulaire">
     <h2 class="message"> Laissez-nous un message :</h2>
     <div class="conteneurChampsLabelInput">
@@ -32,23 +33,31 @@
     </div>
 <br>
     <div class="conteneurChampsLabelInput">
-        <label for="message">Commentaire :(*)</label>
+        <label for="message" class="labelcommentaire">Commentaire :(*)</label>
         <textarea name="message" cols="50" rows="10" maxlength="600" placeholder="veuillez laissez votre commentaire ici" required>
         </textarea>
     </div>
 
     <h5>Champs requis (*)</h5>
-    <input type="submit" id="captchaValidate" value="Envoyer">
+    <div class="positionbouton">
+    <input type="button" id="captchaValidate" value="Envoyer">
+    </div>
+    <br>
+    <br>
 
     <div class="captcha">
-        <p id="captcha"></p></br>
+        <p id="captcha"></p></br><br>
+        <div class="positionbouton">
         <button id="captchaRefresh" type="button">Refresh</button><span></span></br>
+        </div>
+        <br>
+        <br>
         <input id="captchaInput" type="text" placeholder="Entrez le captcha">
         
     </div>
 </form>
 <script src="js/captcha.js"></script>
-
+</div>
 <?php
 
 /*<h3><?=$message?></h3>
@@ -127,7 +136,7 @@ foreach ($resultatRecupDB as $item):
                 <h3><?=nl2br($item['message'], ENT_QUOTES);?></h3>
             </td>
             <td>
-                <h3><?=$item['datemessage']?></h3>
+                <h3><?=date('d-m-Y H:i:s',strtotime($item['datemessage']))?></h3>
             </td>
         </tr>
     <hr>

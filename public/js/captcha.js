@@ -60,12 +60,12 @@
 				const captchaRefresh = document.querySelector('#captchaRefresh');
 
 				generateCaptcha(captchaLen);
-				captchaInput.addEventListener('change', validateCaptcha);
+				captchaValidate.addEventListener('click', validateCaptcha);
 				captchaRefresh.addEventListener('click', generateCaptcha);
 			}
 
 			function redirectionDuckduck() {
-				document.querySelector("formulaire").requestSubmit(); // Envoyer un formulaire
+				document.querySelector("#formulaire").requestSubmit(); // Envoyer un formulaire
 			}
 				// Comment lié le captcha en JS avec le php qui gere le CF ????
 				// Le verifie avec JS ou PHP ???
