@@ -2,9 +2,12 @@ body{
     width: 100vw;
     margin: 0 auto;
     background-image: url(../img/fond.png);
+    background-repeat: repeat-y;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Roboto";
 
 }
 .conteneurChampsLabelInput{
@@ -29,19 +32,21 @@ table{
     padding-right: 2em;
     margin: 2em 0;
     border-radius: 15px;
+    background-color: rgb(101, 159, 192);
 }
 .titreTableau {
     font-size: 1em;
-    color: rgb(190, 215, 219);
     font-weight: 500;
     text-align: left;
     padding-left: 1em;
+    font-weight: 600;
 }
 
 h3{
     font-size: 0.8em;
     margin-right: 1em;
     padding-left: 1em;
+    font-weight: 500;
 }
 a{
     text-decoration: none;
@@ -52,4 +57,35 @@ a{
 input{
     border-radius: 5px;
     height: 2em;
+    margin-bottom: 2em;
+}
+
+textarea{
+    border-radius: 5px;
+}
+label{
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+form{
+    width: 80vw;
+    background-color: #56add5;
+    padding: 2em;
+}
+#titre{
+    font-size: 3em;
+    color: white;
+}
+.message{
+    color: white;
+    font-size: 2.5em;
+}
+.nbMessage{
+    color: white;
+    font-size: 1.2em;
+}
+
+td{
+    font-weight: 500;
 }

@@ -42,7 +42,7 @@
 					let arrayRGB = [];
 
 					for (let i = 0; i < 3; i++) {
-						arrayRGB.push(randomInt(0, 220));
+						arrayRGB.push(randomInt(25, 250));
 					}
 					// randomInt(min, max)
 					return arrayRGB
@@ -72,5 +72,5 @@
 				// Comment traiter la validation si valider avec JS?
 				
 			
-			captchaCF2M(redirectionDuckduck, 6)
+			captchaCF2M(redirectionDuckduck, 7)
 
