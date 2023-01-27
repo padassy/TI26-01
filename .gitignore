@@ -2,8 +2,8 @@ config.php
 /files/
 /.idea/
 datas/
-datas/fig1_vue_smartphone.png
-datas/fig2_vue_tablette.png
-datas/fig3_vue_desktop.png
-datas/consignes.pdf
-datas/eval.pdf
+fig1_vue_smartphone.png
+fig2_vue_tablette.png
+fig3_vue_desktop.png
+consignes.pdf
+eval.pdf
