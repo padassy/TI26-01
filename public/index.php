@@ -68,13 +68,13 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['m
            //ob_start();
            $messageValider = "Merci pour votre commentaire ";
            header("Refresh:3" );
-           /*$to      = $mail;
+           $to      = $mail;
            $subject = 'TI/26-01';
            $message = 'Merci pour votre inscription';
-           $headers = 'From: pierre-alain.dassy@cf2m.onmicrosoft.com' . "\r\n" .
-           'X-Mailer: PHP/' . phpversion();*/
+           $headers = 'From: padassywebdev@gmail.com' . "\r\n" .
+           'X-Mailer: PHP/' . phpversion();
            //header("Location:./");
-           //mail($to, $subject, $message, $headers);
+           mail($to, $subject, $message, $headers);
            //ob_flush();
 
         } catch (Exception $e) {

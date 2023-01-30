@@ -34,9 +34,10 @@
 <br>
     <div class="conteneurChampsLabelInput">
         <label for="message" class="labelcommentaire">Commentaire :(*)</label>
-        <textarea name="message" cols="50" rows="10" maxlength="600" placeholder="veuillez laissez votre commentaire ici" required>
-        </textarea>
+            <textarea id="textarea" name="message" cols="50" rows="10" maxlength="600" placeholder="veuillez laissez votre commentaire ici" required>
+            </textarea>
     </div>
+    <div style="float: right;" id="divCompteur"></div>
 
     <h5>Champs requis (*)</h5>
     <div class="positionbouton">
@@ -64,11 +65,11 @@
 <h3><?$messageGood?></h3>*/
 if (isset($erreur)) :
     ?>
-    <h4><?=$erreur?></h4>
+    <h4 class="messagebad"><?=$erreur?></h4>
      <?php
  elseif (isset($messageValider)) :
     ?>
-    <h4><?=$messageValider?></h4>
+    <h4 class="messagegood"><?=$messageValider?></h4>
     <?php
  endif;
 if ($nbUser == 0):

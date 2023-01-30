@@ -32,9 +32,11 @@
 						captchaInput.classList.remove("invalidCaptcha");
 						captchaInput.classList.add("validCaptcha");
 						callback();
+						return true;
 					} else {
 						captchaInput.classList.add("invalidCaptcha");
 						generateCaptcha(captchaLen);
+						return false
 					}
 				}
 
@@ -58,15 +60,19 @@
 				const captchaInput = document.querySelector('#captchaInput');
 				const captchaValidate = document.querySelector('#captchaValidate');
 				const captchaRefresh = document.querySelector('#captchaRefresh');
+				
 
 				generateCaptcha(captchaLen);
-				captchaValidate.addEventListener('click', validateCaptcha);
+				captchaInput.addEventListener('change', validateCaptcha);
 				captchaRefresh.addEventListener('click', generateCaptcha);
+				captchaValidate.addEventListener('click',validateCaptcha);
 			}
+				
 
 			function redirectionDuckduck() {
 				document.querySelector("#formulaire").requestSubmit(); // Envoyer un formulaire
 			}
+		
 				// Comment lié le captcha en JS avec le php qui gere le CF ????
 				// Le verifie avec JS ou PHP ???
 				// Comment traiter la validation si valider avec JS?
@@ -74,3 +80,15 @@
 			
 			captchaCF2M(redirectionDuckduck, 7)
 
+
+			let textarea = document.querySelector('#textarea');
+			let div = document.querySelector ("#divCompteur")
+			
+			div.insertAdjacentHTML("afterend","<span id='caractereMax'> Caractères maximum </span>");
+			div.insertAdjacentHTML("afterend","<span id='maxCounter'></span>");
+			div.insertAdjacentHTML("afterend","<span id='slash'>/</span>");
+			document.querySelector('#maxCounter').innerHTML = textarea.maxLength ;
+			div.insertAdjacentHTML("afterend","<span id='counterLetters'>0 </span>");
+
+			let counter = document.querySelector('#counterLetters');
+			textarea.addEventListener('input', () => counter.textContent = textarea.value.length);
